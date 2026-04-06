@@ -1,33 +1,36 @@
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Solution {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         
-        // Ensure there is actually input to read
-        if (!sc.hasNextLine()) return;
+        // TODO: Read a single line of text
+        if (!scanner.hasNextLine()) {
+            return;
+        }
+        String line = scanner.nextLine();
         
-        String input = sc.nextLine();
+        // TODO: Split the text into individual words
+        // Using \\s+ handles multiple spaces between words
+        String[] words = line.trim().split("\\s+");
         
-        // Split by one or more whitespace characters
-        // trim() removes leading/trailing spaces that cause empty keys
-        String[] words = input.trim().split("\\s+");
+        // TODO: Create a HashMap to store the frequency of each word
+        HashMap<String, Integer> wordCounts = new HashMap<>();
         
-        HashMap<String, Integer> map = new HashMap<>();
-        
-        for (String w : words) {
-            // Some autograders are case-sensitive. 
-            // If it fails, try adding: w = w.toLowerCase();
-            map.put(w, map.getOrDefault(w, 0) + 1);
+        // TODO: Iterate through the words and update their frequencies in the map
+        for (String word : words) {
+            if (word.isEmpty()) continue;
+            wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
         }
         
-        // Print in the exact format: word: count
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        // TODO: Iterate through the map and print the unique words and their counts
+        // Format: "word: count"
+        for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         
-        sc.close();
+        scanner.close();
     }
 }

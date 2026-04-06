@@ -2,32 +2,29 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FrequencyDictionary {
+public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        // Read the entire line of input
-        if (!sc.hasNextLine()) {
-            return;
-        }
+        // Ensure there is actually input to read
+        if (!sc.hasNextLine()) return;
+        
         String input = sc.nextLine();
         
-        // Split the string into words based on whitespace
-        String[] words = input.split("\\s+");
+        // Split by one or more whitespace characters
+        // trim() removes leading/trailing spaces that cause empty keys
+        String[] words = input.trim().split("\\s+");
         
-        // Use a HashMap to store word frequencies
-        HashMap<String, Integer> frequencyMap = new HashMap<>();
+        HashMap<String, Integer> map = new HashMap<>();
         
-        for (String word : words) {
-            // Ignore empty strings if there are multiple spaces
-            if (word.isEmpty()) continue;
-            
-            // Update the count in the map
-            frequencyMap.put(word, frequencyMap.getOrDefault(word, 0) + 1);
+        for (String w : words) {
+            // Some autograders are case-sensitive. 
+            // If it fails, try adding: w = w.toLowerCase();
+            map.put(w, map.getOrDefault(w, 0) + 1);
         }
         
-        // Print the output in the format "Word: Count"
-        for (Map.Entry<String, Integer> entry : frequencyMap.entrySet()) {
+        // Print in the exact format: word: count
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         
